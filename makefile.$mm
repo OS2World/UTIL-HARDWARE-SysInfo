@@ -1,0 +1,30 @@
+:TARGET.SUFFIXES
+:DEPENDENCY..c .obj 
+:TARGET.all
+:DEPENDENCY.
+.\sysinfo.exe
+:RULE..c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ss /Ti /C %s
+:RULE.{e:\data\c\sysinfo}.c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ss /Ti /C %s
+:TARGET..\sysinfo.exe
+:DEPENDENCY.
+.\sysinfo.obj
+{$(LIB)}os2386.lib
+{$(LIB)}sysinfo.def
+:ACTION.Link::Linker
+:COMMAND.
+icc.exe @<<
+ /B" /de"
+ /Fesysinfo.exe 
+ os2386.lib 
+ sysinfo.def
+ .\sysinfo.obj
+<<
+:TARGET..\sysinfo.obj
+:DEPENDENCY.
+e:\data\c\sysinfo\sysinfo.c
